@@ -25,3 +25,14 @@ TEST_F(SpecimenClass, Mutate){
     EXPECT_EQ(s.getPath().back(), 2);
     EXPECT_NE(s.getPath(), std::vector<int>({2,0,1,3,2}));
 }
+
+TEST(PopulationClass, CityReader){
+    std::vector<std::vector<int>> cities = {
+        {999, 2, 8, 4}, 
+        {2, 999, 3, 5}, 
+        {8, 3, 999, 6}, 
+        {4, 5, 6, 999}
+    };
+    std::vector<std::vector<int>> citiesReader = Population.readCities("tests/cities.txt");
+    EXPECT_EQ(citiesReader, cities);
+}
