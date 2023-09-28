@@ -16,3 +16,12 @@ TEST_F(SpecimenClass, GetPath){
     EXPECT_EQ(s.getPath().back(), 2);
     EXPECT_NE(s.getPath(), std::vector<int>({2,0,1,3,2}));
 }
+
+TEST_F(SpecimenClass, Mutate){
+    for (int i = 0; i < 100; i++){
+        s.mutate();
+    }
+    EXPECT_EQ(s.getPath().front(), 2);
+    EXPECT_EQ(s.getPath().back(), 2);
+    EXPECT_NE(s.getPath(), std::vector<int>({2,0,1,3,2}));
+}
