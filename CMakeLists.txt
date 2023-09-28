@@ -4,12 +4,18 @@ project(
   VERSION 0.1.0
   LANGUAGES C CXX)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 include(cmake/UpdateSubmodules.cmake)
 include(CTest)
 
 add_subdirectory(external/googletest)
 
-set(SOURCE)# src/Specimen.cpp)
+set(SOURCE src/Specimen.cpp)
 set(HEADERS lib/Specimen.hpp)
 set(TESTS tests/tests.cpp)
 
@@ -24,6 +30,11 @@ if(BUILD_TESTING)
     include(GoogleTest)
     gtest_discover_tests(${PROJECT_NAME}-ut)
 endif()
+
+# set(FLAGS -Wall -Wextra -Werror -pedantic -Wconversion -O3)
+
+# target_compile_options(${PROJECT_NAME} ${FLAGS})
+# target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
