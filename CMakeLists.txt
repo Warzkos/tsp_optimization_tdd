@@ -15,8 +15,8 @@ include(CTest)
 
 add_subdirectory(external/googletest)
 
-set(SOURCE src/Specimen.cpp)
-set(HEADERS lib/Specimen.hpp)
+set(SOURCE src/Specimen.cpp src/Population.cpp)
+set(HEADERS lib/Specimen.hpp lib/Population.hpp)
 set(TESTS tests/tests.cpp)
 
 

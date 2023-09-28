@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../lib/Specimen.hpp"
+#include "../lib/Population.hpp"
 
 struct SpecimenClass : public ::testing::Test{
     Specimen s = Specimen(4, 2);
@@ -33,6 +34,6 @@ TEST(PopulationClass, CityReader){
         {8, 3, 999, 6}, 
         {4, 5, 6, 999}
     };
-    std::vector<std::vector<int>> citiesReader = Population.readCities("tests/cities.txt");
-    EXPECT_EQ(citiesReader, cities);
+    Population::readCities("tests/cities.txt");
+    EXPECT_EQ(Population::getCities(), ::testing::ContainerEq(cities));
 }
