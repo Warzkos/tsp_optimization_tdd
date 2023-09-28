@@ -14,4 +14,5 @@ public:
     ~Specimen() = default;
 
     std::vector<int> getPath() const;
+    void mutate(int probability = 10, int numOfMutations = 1);
 };

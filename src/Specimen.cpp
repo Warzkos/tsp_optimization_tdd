@@ -15,3 +15,13 @@ Specimen::Specimen(const int &numOfCities, const int &startCity){
 std::vector<int> Specimen::getPath() const{
     return path;
 }
+
+void Specimen::mutate(int probability, int numOfMutations){
+    for(int i = 0; i < numOfMutations; i++){
+        if(rng() % 100 < probability){
+            int firstCity = rng() % (path.size()-2) + 1;
+            int secondCity = rng() % (path.size()-2) + 1;
+            std::swap(path[firstCity], path[secondCity]);
+        }
+    }
+}
