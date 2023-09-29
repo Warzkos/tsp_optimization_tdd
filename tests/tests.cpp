@@ -49,6 +49,18 @@ TEST_F(SpecimenClass, SpecimensAreDifferent){
     EXPECT_NE(sPath, s2Path);
 }
 
+TEST(PopulationClass, PopulationConstructor) {
+    EXPECT_FALSE(std::is_default_constructible<Population>::value);
+    EXPECT_THROW(Population population = Population(100), std::invalid_argument);
+
+    std::vector<std::vector<int>> actualCities = {
+        {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
+    Population::setCitiesDistanceMatrix(actualCities);
+
+    Population population = Population(100);
+    EXPECT_EQ(population.getPopulationSize(), 100);
+}
+
 TEST(PopulationClass, CityReader) {
     std::vector<std::vector<int>> actualCities = {
         {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
@@ -71,17 +83,6 @@ TEST(PopulationClass, SetCitiesDistanceMatrix) {
     EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
 }
 
-TEST(PopulationClass, PopulationConstructor) {
-    EXPECT_FALSE(std::is_default_constructible<Population>::value);
-    EXPECT_THROW(Population population = Population(100), std::invalid_argument);
-
-    std::vector<std::vector<int>> actualCities = {
-        {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
-    Population::setCitiesDistanceMatrix(actualCities);
-
-    Population population = Population(100);
-    EXPECT_EQ(population.getPopulationSize(), 100);
-}
 
 // TEST(PopulationClass, AddSpecimenToPopulation) {
 //     Population population = Population();
