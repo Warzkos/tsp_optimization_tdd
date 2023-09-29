@@ -40,3 +40,10 @@ TEST(PopulationClass, CityReader){
     Population::readCities("cities.txt");
     EXPECT_EQ(Population::getCities(), actualCities);
 }
+
+TEST(PopulationClass, CityReaderFileNameException){
+    EXPECT_THROW(
+        Population::readCities("nonExistentFile.txt"),
+        std::invalid_argument
+    );
+}
