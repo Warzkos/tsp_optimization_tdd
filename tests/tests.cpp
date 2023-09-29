@@ -104,15 +104,17 @@ TEST_F(PopulationClass, GetStartCity) {
     EXPECT_EQ(p.getStartCity(), 3);
 }
 
-// TEST_F(PopulationClass, AddSpecimenToPopulation) {
-//     Population::setCitiesDistanceMatrix(actualCities);
-//     Population::setStartCity(1);
-//     Population population = Population();
-//     Specimen s = Specimen(4, 2);
-//     EXPECT_THROW(population.addSpecimenToPopulation(s), std::invalid_argument);
-//     s = Specimen(3, 1);
-//     EXPECT_THROW(population.addSpecimenToPopulation(s), std::invalid_argument);
-// }
+TEST_F(PopulationClass, AddSpecimenToPopulation) {
+    Population::setCitiesDistanceMatrix(actualCities);
+    Population::setStaticStartCity(1);
+    Population p = Population(5);
+    Specimen s = Specimen(4, 2);
+    EXPECT_THROW(p.addSpecimenToPopulation(s), std::invalid_argument);
+    s = Specimen(3, 1);
+    EXPECT_THROW(p.addSpecimenToPopulation(s), std::invalid_argument);
+    s = Specimen(4, 1);
+    EXPECT_NO_THROW(p.addSpecimenToPopulation(s));
+}
 
 TEST(PopulationClassReader, CityReaderFileNameException) {
     EXPECT_THROW(Population::readCities("nonExistentFile.txt"),
