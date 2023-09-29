@@ -63,3 +63,21 @@ TEST(PopulationClass, CityReaderFileNameException) {
     EXPECT_THROW(Population::readCities("nonExistentFile.txt"),
                  std::invalid_argument);
 }
+
+TEST(PopulationClass, SetCitiesDistanceMatrix) {
+    std::vector<std::vector<int>> actualCities = {
+        {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
+    Population::setCitiesDistanceMatrix(actualCities);
+    EXPECT_EQ(Population::getCities(), actualCities);
+}
+
+// TEST(PopulationClass, CreatePopulationConstructor) {
+//     Population population = Population(100);
+//     EXPECT_EQ(population.getPopulationSize(), 100);
+// }
+
+// TEST(PopulationClass, AddSpecimenToPopulation) {
+//     Population population = Population();
+//     Specimen s = Specimen(4, 2);
+//     population.addSpecimenToPopulation(s);
+// }
