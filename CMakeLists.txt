@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(
-  tsp_optimization_tdd
-  VERSION 0.1.0
-  LANGUAGES C CXX)
+    tsp_optimization_tdd
+    VERSION 0.1.0
+    LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,7 +18,6 @@ add_subdirectory(external/googletest)
 set(SOURCE src/Specimen.cpp src/Population.cpp)
 set(HEADERS lib/Specimen.hpp lib/Population.hpp)
 set(TESTS tests/tests.cpp)
-
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 

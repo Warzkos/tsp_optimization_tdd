@@ -1,14 +1,15 @@
 #pragma once
 
-#include <fstream>
-#include <vector>
-#include <sstream>
 #include "Specimen.hpp"
+#include <fstream>
+#include <sstream>
+#include <vector>
 
 class Population {
-private:
+  private:
     static std::vector<std::vector<int>> cities;
-public:
+
+  public:
     static void readCities(const std::string &fileName);
     static std::vector<std::vector<int>> getCities();
 };
