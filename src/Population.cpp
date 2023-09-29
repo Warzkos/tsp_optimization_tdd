@@ -1,5 +1,7 @@
 #include "../lib/Population.hpp"
 
+std::vector<std::vector<int>> Population::cities;
+
 void Population::readCities(const std::string &fileName){
     std::ifstream file(fileName);
     std::string line;

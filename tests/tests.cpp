@@ -28,12 +28,12 @@ TEST_F(SpecimenClass, Mutate){
 }
 
 TEST(PopulationClass, CityReader){
-    std::vector<std::vector<int>> cities = {
+    std::vector<std::vector<int>> actualCities = {
         {999, 2, 8, 4}, 
         {2, 999, 3, 5}, 
         {8, 3, 999, 6}, 
         {4, 5, 6, 999}
     };
-    Population::readCities("tests/cities.txt");
-    EXPECT_EQ(Population::getCities(), ::testing::ContainerEq(cities));
+    Population::readCities("cities.txt");
+    EXPECT_EQ(Population::getCities(), actualCities);
 }
