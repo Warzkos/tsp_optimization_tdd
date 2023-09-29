@@ -53,10 +53,10 @@ TEST(PopulationClass, CityReader) {
     std::vector<std::vector<int>> actualCities = {
         {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
     Population::readCities("cities.txt");
-    EXPECT_EQ(Population::getCities(), actualCities);
+    EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
 
     Population::readCities("cities.txt");
-    EXPECT_EQ(Population::getCities(), actualCities);
+    EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
 }
 
 TEST(PopulationClass, CityReaderFileNameException) {
@@ -68,7 +68,7 @@ TEST(PopulationClass, SetCitiesDistanceMatrix) {
     std::vector<std::vector<int>> actualCities = {
         {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
     Population::setCitiesDistanceMatrix(actualCities);
-    EXPECT_EQ(Population::getCities(), actualCities);
+    EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
 }
 
 // TEST(PopulationClass, CreatePopulationConstructor) {

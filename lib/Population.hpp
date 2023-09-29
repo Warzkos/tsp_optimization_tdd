@@ -11,6 +11,6 @@ class Population {
 
   public:
     static void readCities(const std::string &fileName);
-    static std::vector<std::vector<int>> getCities();
+    static std::vector<std::vector<int>> getCitiesDistanceMatrix();
     static void setCitiesDistanceMatrix(const std::vector<std::vector<int>> &citiesDistanceMatrix);
 };

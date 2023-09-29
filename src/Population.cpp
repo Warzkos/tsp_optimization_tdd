@@ -25,4 +25,4 @@ void Population::setCitiesDistanceMatrix(const std::vector<std::vector<int>> &ci
     cities = citiesDistanceMatrix;
 }
 
-std::vector<std::vector<int>> Population::getCities() { return cities; }
+std::vector<std::vector<int>> Population::getCitiesDistanceMatrix() { return cities; }
