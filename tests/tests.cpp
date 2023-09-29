@@ -36,4 +36,7 @@ TEST(PopulationClass, CityReader){
     };
     Population::readCities("cities.txt");
     EXPECT_EQ(Population::getCities(), actualCities);
+
+    Population::readCities("cities.txt");
+    EXPECT_EQ(Population::getCities(), actualCities);
 }
