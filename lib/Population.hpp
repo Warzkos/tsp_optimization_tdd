@@ -9,6 +9,7 @@ class Population {
   private:
     static std::vector<std::vector<int>> cities;
     static int startCity;
+    int _startCity;
     std::vector<Specimen> population;
 
   public:
@@ -16,8 +17,9 @@ class Population {
     Population(const int &populationSize);
     ~Population() = default;
     int getPopulationSize() const;
-    static void setStartCity(const int &startCity);
-    static int getStartCity();
+    int getStartCity() const;
+    static void setStaticStartCity(const int &startCity);
+    static int getStaticStartCity();
     static void readCities(const std::string &fileName);
     static std::vector<std::vector<int>> getCitiesDistanceMatrix();
     static void setCitiesDistanceMatrix(const std::vector<std::vector<int>> &citiesDistanceMatrix);

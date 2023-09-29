@@ -13,6 +13,7 @@ Population::Population(const int &populationSize) {
         for (int i = 0; i < populationSize; i++) {
             population.push_back(Specimen(cities.size(), startCity));
         }
+        _startCity = startCity;
     }
 }
 
@@ -43,7 +44,9 @@ std::vector<std::vector<int>> Population::getCitiesDistanceMatrix() { return cit
 
 int Population::getPopulationSize() const { return population.size(); }
 
-void Population::setStartCity(const int &startCity) { 
+int Population::getStartCity() const { return _startCity; }
+
+void Population::setStaticStartCity(const int &startCity) { 
     if(!(startCity>cities.size())){
         Population::startCity = startCity; 
     } else {
@@ -51,4 +54,4 @@ void Population::setStartCity(const int &startCity) {
     }
 }
 
-int Population::getStartCity() { return startCity; }
+int Population::getStaticStartCity() { return startCity; }
