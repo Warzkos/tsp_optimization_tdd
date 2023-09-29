@@ -85,17 +85,17 @@ TEST_F(PopulationClass, SetCitiesDistanceMatrix) {
     EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
 }
 
+TEST_F(PopulationClass, SetStartCity) {
+    EXPECT_THROW(Population::setStartCity(10), std::invalid_argument);
+    Population::setStartCity(3);
+    EXPECT_EQ(Population::getStartCity(), 3);
+}
 
 TEST(PopulationClassReader, CityReaderFileNameException) {
     EXPECT_THROW(Population::readCities("nonExistentFile.txt"),
                  std::invalid_argument);
 }
 
-TEST_F(PopulationClass, SetStartCity) {
-    EXPECT_THROW(Population::setStartCity(10), std::invalid_argument);
-    Population::setStartCity(3);
-    EXPECT_EQ(Population::getStartCity(), 3);
-}
 
 // TEST(PopulationClass, AddSpecimenToPopulation) {
 //     Population population = Population();
