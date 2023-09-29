@@ -49,21 +49,26 @@ TEST_F(SpecimenClass, SpecimensAreDifferent){
     EXPECT_NE(sPath, s2Path);
 }
 
-TEST(PopulationClass, PopulationConstructor) {
+TEST(PopulationClassConstructor, PopulationConstructor) {
     EXPECT_FALSE(std::is_default_constructible<Population>::value);
     EXPECT_THROW(Population population = Population(100), std::invalid_argument);
+}
 
+struct PopulationClass : public ::testing::Test
+{
     std::vector<std::vector<int>> actualCities = {
         {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
-    Population::setCitiesDistanceMatrix(actualCities);
+};
 
+
+TEST_F(PopulationClass, PopulationConstructor) {
+
+    Population::setCitiesDistanceMatrix(actualCities);
     Population population = Population(100);
     EXPECT_EQ(population.getPopulationSize(), 100);
 }
 
-TEST(PopulationClass, CityReader) {
-    std::vector<std::vector<int>> actualCities = {
-        {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
+TEST_F(PopulationClass, CityReader) {
     Population::readCities("cities.txt");
     EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
 
@@ -71,16 +76,15 @@ TEST(PopulationClass, CityReader) {
     EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
 }
 
-TEST(PopulationClass, CityReaderFileNameException) {
-    EXPECT_THROW(Population::readCities("nonExistentFile.txt"),
-                 std::invalid_argument);
-}
-
-TEST(PopulationClass, SetCitiesDistanceMatrix) {
-    std::vector<std::vector<int>> actualCities = {
-        {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
+TEST_F(PopulationClass, SetCitiesDistanceMatrix) {
     Population::setCitiesDistanceMatrix(actualCities);
     EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
+}
+
+
+TEST(PopulationClassReader, CityReaderFileNameException) {
+    EXPECT_THROW(Population::readCities("nonExistentFile.txt"),
+                 std::invalid_argument);
 }
 
 
