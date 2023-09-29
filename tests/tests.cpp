@@ -88,7 +88,7 @@ TEST(PopulationClassReader, CityReaderFileNameException) {
 }
 
 TEST_F(PopulationClass, SetStartCity) {
-    EXPECT_THROW(Population::setStartCity(10));
+    EXPECT_THROW(Population::setStartCity(10), std::invalid_argument);
     Population::setStartCity(3);
     EXPECT_EQ(Population::getStartCity(), 3);
 }

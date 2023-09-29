@@ -1,6 +1,9 @@
 #include "../lib/Population.hpp"
 #include <iostream>
+
 std::vector<std::vector<int>> Population::cities;
+
+int Population::startCity;
 
 Population::Population(const int &populationSize) {
     if(cities.empty()){
@@ -39,3 +42,13 @@ void Population::setCitiesDistanceMatrix(const std::vector<std::vector<int>> &ci
 std::vector<std::vector<int>> Population::getCitiesDistanceMatrix() { return cities; }
 
 int Population::getPopulationSize() const { return population.size(); }
+
+void Population::setStartCity(const int &startCity) { 
+    if(!(startCity>cities.size())){
+        Population::startCity = startCity; 
+    } else {
+        throw std::invalid_argument("Start city out of range; Check if CitiesDistanceMatrix is set");
+    }
+}
+
+int Population::getStartCity() { return startCity; }
