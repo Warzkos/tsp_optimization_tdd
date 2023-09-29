@@ -21,4 +21,8 @@ void Population::readCities(const std::string &fileName) {
     }
 }
 
+void Population::setCitiesDistanceMatrix(const std::vector<std::vector<int>> &citiesDistanceMatrix) {
+    cities = citiesDistanceMatrix;
+}
+
 std::vector<std::vector<int>> Population::getCities() { return cities; }
