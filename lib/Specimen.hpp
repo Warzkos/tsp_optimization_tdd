@@ -6,7 +6,7 @@
 
 class Specimen {
   private:
-    std::minstd_rand0 rng = std::default_random_engine{};
+    static std::minstd_rand0 rng;
     std::vector<int> path;
     int fitness;
 

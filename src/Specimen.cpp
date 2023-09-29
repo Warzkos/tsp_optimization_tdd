@@ -1,5 +1,7 @@
 #include "../lib/Specimen.hpp"
 
+std::minstd_rand0 Specimen::rng = std::default_random_engine{};
+
 Specimen::Specimen(const int &numOfCities, const int &startCity) {
     path.push_back(startCity);
     for (int i = 0; i < numOfCities; i++) {
