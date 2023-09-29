@@ -11,6 +11,12 @@ TEST(SpecimenConstructor, NoDefaultConstructor) {
     EXPECT_FALSE(std::is_default_constructible<Specimen>::value);
 }
 
+TEST(SpecimenConstructor, PathConstructor) {
+    EXPECT_NO_THROW(Specimen s = Specimen(std::vector<int>({2, 1, 3, 0, 2})));
+    EXPECT_THROW(Specimen s = Specimen(std::vector<int>({2, 1, 3, 0, 1})), std::invalid_argument);
+    EXPECT_THROW(Specimen s = Specimen(std::vector<int>({2, 1, 3, 4, 2})), std::invalid_argument);
+}
+
 TEST_F(SpecimenClass, GetPath) {
     int pathLength = static_cast<int>(s.getPath().size());
     EXPECT_EQ(pathLength, 5);
@@ -91,14 +97,17 @@ TEST_F(PopulationClass, SetStartCity) {
     EXPECT_EQ(Population::getStartCity(), 3);
 }
 
+// TEST_F(PopulationClass, AddSpecimenToPopulation) {
+//     Population::setCitiesDistanceMatrix(actualCities);
+//     Population::setStartCity(1);
+//     Population population = Population(30);
+//     Specimen s = Specimen(4, 2);
+//     EXPECT_THROW(population.addSpecimenToPopulation(s), std::invalid_argument);
+//     Specimen s1 = Specimen(3, 1);
+//     EXPECT_THROW(population.addSpecimenToPopulation(s1));
+// }
+
 TEST(PopulationClassReader, CityReaderFileNameException) {
     EXPECT_THROW(Population::readCities("nonExistentFile.txt"),
                  std::invalid_argument);
 }
-
-
-// TEST(PopulationClass, AddSpecimenToPopulation) {
-//     Population population = Population();
-//     Specimen s = Specimen(4, 2);
-//     population.addSpecimenToPopulation(s);
-// }
