@@ -1,6 +1,7 @@
 #include "../lib/Population.hpp"
 #include "../lib/Specimen.hpp"
 #include <gtest/gtest.h>
+#include <ranges>
 
 struct SpecimenClass : public ::testing::Test {
     Specimen s = Specimen(4, 2);
@@ -25,6 +26,20 @@ TEST_F(SpecimenClass, Mutate) {
     EXPECT_EQ(s.getPath().front(), 2);
     EXPECT_EQ(s.getPath().back(), 2);
     EXPECT_NE(s.getPath(), std::vector<int>({2, 0, 1, 3, 2}));
+}
+
+TEST_F(SpecimenClass, CalcFitness) {
+    std::vector<std::vector<int>> citiesDistanceMatrix = {
+        {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
+    auto actualFitness = 0;
+    auto path = s.getPath();
+    auto prevCity = path.front();
+    for (auto city : path | std::views::drop(1)) {
+        actualFitness += citiesDistanceMatrix[prevCity][city];
+        prevCity = city;
+    }
+    s.calcFitness(citiesDistanceMatrix);
+    EXPECT_EQ(s.getFitness(), actualFitness);
 }
 
 TEST(PopulationClass, CityReader) {
