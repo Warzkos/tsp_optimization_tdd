@@ -3,6 +3,7 @@
 std::vector<std::vector<int>> Population::cities;
 
 void Population::readCities(const std::string &fileName){
+    cities.clear();
     std::ifstream file(fileName);
     std::string line;
     while(std::getline(file, line)){
