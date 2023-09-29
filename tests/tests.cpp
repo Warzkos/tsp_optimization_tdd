@@ -42,6 +42,13 @@ TEST_F(SpecimenClass, CalcFitness) {
     EXPECT_EQ(s.getFitness(), actualFitness);
 }
 
+TEST_F(SpecimenClass, SpecimensAreDifferent){
+    Specimen s2 = Specimen(4, 2);
+    auto sPath = s.getPath();
+    auto s2Path = s2.getPath();
+    EXPECT_NE(sPath, s2Path);
+}
+
 TEST(PopulationClass, CityReader) {
     std::vector<std::vector<int>> actualCities = {
         {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
