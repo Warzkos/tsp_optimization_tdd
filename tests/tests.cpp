@@ -54,6 +54,10 @@ TEST(PopulationClassConstructor, PopulationConstructor) {
     EXPECT_THROW(Population population = Population(100), std::invalid_argument);
 }
 
+TEST(PopulationClassStartCity, StartCityDefaultValue){
+    EXPECT_EQ(Population::getStartCity(), 0);
+}
+
 struct PopulationClass : public ::testing::Test
 {
     std::vector<std::vector<int>> actualCities = {
