@@ -61,7 +61,7 @@ TEST(PopulationClassConstructor, PopulationConstructor) {
 }
 
 TEST(PopulationClassStartCity, StartCityDefaultValue){
-    EXPECT_EQ(Population::getStartCity(), 0);
+    EXPECT_EQ(Population::getStaticStartCity(), 0);
 }
 
 struct PopulationClass : public ::testing::Test
@@ -91,20 +91,27 @@ TEST_F(PopulationClass, SetCitiesDistanceMatrix) {
     EXPECT_EQ(Population::getCitiesDistanceMatrix(), actualCities);
 }
 
-TEST_F(PopulationClass, SetStartCity) {
-    EXPECT_THROW(Population::setStartCity(10), std::invalid_argument);
-    Population::setStartCity(3);
-    EXPECT_EQ(Population::getStartCity(), 3);
+TEST_F(PopulationClass, SetStaticStartCity) {
+    EXPECT_THROW(Population::setStaticStartCity(10), std::invalid_argument);
+    Population::setStaticStartCity(3);
+    EXPECT_EQ(Population::getStaticStartCity(), 3);
+}
+
+TEST_F(PopulationClass, GetStartCity) {
+    Population::setStaticStartCity(3);
+    Population p = Population(5);
+    Population::setStaticStartCity(1);
+    EXPECT_EQ(p.getStartCity(), 3);
 }
 
 // TEST_F(PopulationClass, AddSpecimenToPopulation) {
 //     Population::setCitiesDistanceMatrix(actualCities);
 //     Population::setStartCity(1);
-//     Population population = Population(30);
+//     Population population = Population();
 //     Specimen s = Specimen(4, 2);
 //     EXPECT_THROW(population.addSpecimenToPopulation(s), std::invalid_argument);
-//     Specimen s1 = Specimen(3, 1);
-//     EXPECT_THROW(population.addSpecimenToPopulation(s1));
+//     s = Specimen(3, 1);
+//     EXPECT_THROW(population.addSpecimenToPopulation(s), std::invalid_argument);
 // }
 
 TEST(PopulationClassReader, CityReaderFileNameException) {
