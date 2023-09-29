@@ -46,6 +46,16 @@ int Population::getPopulationSize() const { return population.size(); }
 
 int Population::getStartCity() const { return _startCity; }
 
+void Population::addSpecimenToPopulation(const Specimen &specimen) {
+    if (specimen.getPath().size() != cities.size() + 1) {
+        throw std::invalid_argument("Specimen path size must be equal to the number of cities + 1");
+    }
+    if (specimen.getPath().front() != _startCity) {
+        throw std::invalid_argument("Specimen start city is different than populations start city");
+    }
+    population.push_back(specimen);
+}
+
 void Population::setStaticStartCity(const int &startCity) { 
     if(!(startCity>cities.size())){
         Population::startCity = startCity; 
