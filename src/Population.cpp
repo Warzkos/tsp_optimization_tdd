@@ -3,7 +3,7 @@
 
 std::vector<std::vector<int>> Population::cities;
 
-int Population::startCity;
+int Population::startCity = 0;
 
 Population::Population(const int &populationSize) {
     if(cities.empty()){
@@ -11,7 +11,7 @@ Population::Population(const int &populationSize) {
     } else {
         std::cout << cities.size() << std::endl;
         for (int i = 0; i < populationSize; i++) {
-            population.push_back(Specimen(cities.size(), 0));
+            population.push_back(Specimen(cities.size(), startCity));
         }
     }
 }
