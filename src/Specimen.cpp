@@ -23,3 +23,15 @@ void Specimen::mutate(int probability, int numOfMutations) {
         }
     }
 }
+
+void Specimen::calcFitness(const std::vector<std::vector<int>> &citiesDistanceMatrix) {
+    auto fitness = 0;
+    auto prevCity = path.front();
+    for (auto city : path | std::views::drop(1)) {
+        fitness += citiesDistanceMatrix[prevCity][city];
+        prevCity = city;
+    }
+    this->fitness = fitness;
+}
+
+int Specimen::getFitness() const { return fitness; }
