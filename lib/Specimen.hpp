@@ -13,6 +13,7 @@ class Specimen {
   public:
     Specimen() = delete;
     Specimen(const int &numOfCities, const int &startCity);
+    Specimen(const std::vector<int> &path);
     ~Specimen() = default;
 
     std::vector<int> getPath() const;

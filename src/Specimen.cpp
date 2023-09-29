@@ -14,6 +14,18 @@ Specimen::Specimen(const int &numOfCities, const int &startCity) {
     std::shuffle(path.begin() + 1, path.end() - 1, rng);
 }
 
+Specimen::Specimen(const std::vector<int> &path) {
+    if (path.front() != path.back()) {
+        throw std::invalid_argument("Path must start and end with the same city");
+    }
+    for (int i = 0; i < path.size()-1; i++) {
+        if (std::count(path.begin(), path.end(), i) != 1 && i != path.front()) {
+            throw std::invalid_argument("Path must contain each city exactly once");
+        }
+    }
+    this->path = path;
+}
+
 std::vector<int> Specimen::getPath() const { return path; }
 
 void Specimen::mutate(int probability, int numOfMutations) {
