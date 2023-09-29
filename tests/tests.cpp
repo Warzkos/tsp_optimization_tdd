@@ -87,6 +87,11 @@ TEST(PopulationClassReader, CityReaderFileNameException) {
                  std::invalid_argument);
 }
 
+TEST_F(PopulationClass, SetStartCity) {
+    EXPECT_THROW(Population::setStartCity(10));
+    Population::setStartCity(3);
+    EXPECT_EQ(Population::getStartCity(), 3);
+}
 
 // TEST(PopulationClass, AddSpecimenToPopulation) {
 //     Population population = Population();
