@@ -1,5 +1,4 @@
 #include "../lib/Population.hpp"
-#include <iostream>
 
 std::vector<std::vector<int>> Population::cities;
 
@@ -9,7 +8,6 @@ Population::Population(const int &populationSize) {
     if(cities.empty()){
         throw std::invalid_argument("CitiesDistanceMatrix not found; Use Population::readCities() or Population::setCitiesDistanceMatrix()");
     } else {
-        std::cout << cities.size() << std::endl;
         for (int i = 0; i < populationSize; i++) {
             population.push_back(Specimen(cities.size(), startCity));
         }
