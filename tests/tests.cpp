@@ -71,11 +71,10 @@ struct PopulationClass : public ::testing::Test
 };
 
 
-TEST_F(PopulationClass, PopulationConstructor) {
-
+TEST_F(PopulationClass, GetPopulationAndConstructor) {
     Population::setCitiesDistanceMatrix(actualCities);
     Population population = Population(100);
-    EXPECT_EQ(population.getPopulationSize(), 100);
+    EXPECT_EQ(population.getPopulation().size(), 100);
 }
 
 TEST_F(PopulationClass, CityReader) {
