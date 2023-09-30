@@ -16,7 +16,7 @@ class Population {
     Population() = delete;
     Population(const int &populationSize);
     ~Population() = default;
-    int getPopulationSize() const;
+    std::vector<Specimen> getPopulation() const;
     int getStartCity() const;
     void addSpecimenToPopulation(const Specimen &specimen);
     static void setStaticStartCity(const int &startCity);

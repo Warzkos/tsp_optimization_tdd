@@ -40,7 +40,7 @@ void Population::setCitiesDistanceMatrix(const std::vector<std::vector<int>> &ci
 
 std::vector<std::vector<int>> Population::getCitiesDistanceMatrix() { return cities; }
 
-int Population::getPopulationSize() const { return population.size(); }
+std::vector<Specimen> Population::getPopulation() const { return population; }
 
 int Population::getStartCity() const { return _startCity; }
 
