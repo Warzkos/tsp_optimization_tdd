@@ -13,8 +13,10 @@ TEST(SpecimenConstructor, NoDefaultConstructor) {
 
 TEST(SpecimenConstructor, PathConstructor) {
     EXPECT_NO_THROW(Specimen s = Specimen(std::vector<int>({2, 1, 3, 0, 2})));
-    EXPECT_THROW(Specimen s = Specimen(std::vector<int>({2, 1, 3, 0, 1})), std::invalid_argument);
-    EXPECT_THROW(Specimen s = Specimen(std::vector<int>({2, 1, 3, 4, 2})), std::invalid_argument);
+    EXPECT_THROW(Specimen s = Specimen(std::vector<int>({2, 1, 3, 0, 1})),
+                 std::invalid_argument);
+    EXPECT_THROW(Specimen s = Specimen(std::vector<int>({2, 1, 3, 4, 2})),
+                 std::invalid_argument);
 }
 
 TEST_F(SpecimenClass, GetPath) {
@@ -48,28 +50,27 @@ TEST_F(SpecimenClass, CalcFitness) {
     EXPECT_EQ(s.getFitness(), actualFitness);
 }
 
-TEST_F(SpecimenClass, SpecimensAreDifferent){
+TEST_F(SpecimenClass, SpecimensAreDifferent) {
     Specimen s2 = Specimen(4, 2);
     auto sPath = s.getPath();
     auto s2Path = s2.getPath();
     EXPECT_NE(sPath, s2Path);
 }
 
-TEST(PopulationClassConstructor, PopulationConstructor) {
+TEST(PopulationClassTest, PopulationConstructor) {
     EXPECT_FALSE(std::is_default_constructible<Population>::value);
-    EXPECT_THROW(Population population = Population(100), std::invalid_argument);
+    EXPECT_THROW(Population population = Population(100),
+                 std::invalid_argument);
 }
 
-TEST(PopulationClassStartCity, StartCityDefaultValue){
+TEST(PopulationClassTest, StartCityDefaultValue) {
     EXPECT_EQ(Population::getStaticStartCity(), 0);
 }
 
-struct PopulationClass : public ::testing::Test
-{
+struct PopulationClass : public ::testing::Test {
     std::vector<std::vector<int>> actualCities = {
         {999, 2, 8, 4}, {2, 999, 3, 5}, {8, 3, 999, 6}, {4, 5, 6, 999}};
 };
-
 
 TEST_F(PopulationClass, GetPopulationAndConstructor) {
     Population::setCitiesDistanceMatrix(actualCities);
@@ -115,7 +116,47 @@ TEST_F(PopulationClass, AddSpecimenToPopulation) {
     EXPECT_NO_THROW(p.addSpecimenToPopulation(s));
 }
 
-TEST(PopulationClassReader, CityReaderFileNameException) {
+TEST(SpecimenClassTest, GenerateOffspring) {
+    Specimen parent1 = Specimen(std::vector<int>({1, 2, 6, 4, 5, 3, 0, 1}));
+    Specimen parent2 = Specimen(std::vector<int>({1, 4, 0, 3, 6, 2, 5, 1}));
+
+    Specimen incompatibleParent1 =
+        Specimen(std::vector<int>({0, 2, 6, 4, 5, 3, 1, 0}));
+    Specimen incompatibleParent2 =
+        Specimen(std::vector<int>({1, 4, 0, 3, 2, 5, 1}));
+
+    EXPECT_THROW(parent1.generateOffspring(incompatibleParent1),
+                 std::invalid_argument);
+    EXPECT_THROW(parent1.generateOffspring(incompatibleParent2),
+                 std::invalid_argument);
+
+    std::pair<Specimen, Specimen> offspring =
+        parent1.generateOffspring(parent2);
+
+    std::vector<std::pair<Specimen, Specimen>> possibleOffspring = {
+        std::pair<Specimen, Specimen>(
+            Specimen(std::vector<int>({1, 2, 0, 6, 4, 5, 3, 1})),
+            Specimen(std::vector<int>({1, 4, 3, 6, 2, 5, 0, 1}))),
+        std::pair<Specimen, Specimen>(
+            Specimen(std::vector<int>({1, 6, 0, 4, 5, 2, 3, 1})),
+            Specimen(std::vector<int>({1, 2, 4, 3, 6, 5, 0, 1}))),
+        std::pair<Specimen, Specimen>(
+            Specimen(std::vector<int>({1, 6, 0, 3, 4, 2, 5, 1})),
+            Specimen(std::vector<int>({1, 2, 4, 6, 5, 3, 0, 1}))),
+        std::pair<Specimen, Specimen>(
+            Specimen(std::vector<int>({1, 4, 0, 3, 6, 2, 5, 1})),
+            Specimen(std::vector<int>({1, 2, 6, 4, 5, 3, 0, 1}))),
+    };
+    EXPECT_TRUE(
+        std::any_of(possibleOffspring.begin(), possibleOffspring.end(),
+                    [&offspring = std::as_const(offspring)](
+                        std::pair<Specimen, Specimen> i) {
+                        return i.first.getPath() == offspring.first.getPath() &&
+                               i.second.getPath() == offspring.second.getPath();
+                    }));
+}
+
+TEST(PopulationClassTest, CityReaderFileNameException) {
     EXPECT_THROW(Population::readCities("nonExistentFile.txt"),
                  std::invalid_argument);
 }
