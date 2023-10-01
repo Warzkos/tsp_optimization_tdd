@@ -20,4 +20,5 @@ class Specimen {
     void mutate(int probability = 10, int numOfMutations = 1);
     void calcFitness(const std::vector<std::vector<int>> &citiesDistanceMatrix);
     int getFitness() const;
+    std::pair<Specimen, Specimen> generateOffspring(const Specimen &other) const;
 };
