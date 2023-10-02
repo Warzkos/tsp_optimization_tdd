@@ -54,6 +54,12 @@ void Population::addSpecimenToPopulation(const Specimen &specimen) {
     population.push_back(specimen);
 }
 
+void Population::calcFitness() {
+    for (auto &specimen : population) {
+        specimen.calcFitness(cities);
+    }
+}
+
 void Population::setStaticStartCity(const int &startCity) { 
     if(!(startCity>cities.size())){
         Population::startCity = startCity; 

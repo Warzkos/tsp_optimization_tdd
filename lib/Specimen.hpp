@@ -8,7 +8,7 @@ class Specimen {
   private:
     static std::minstd_rand0 rng;
     std::vector<int> path;
-    int fitness;
+    int fitness = 0;
 
   public:
     Specimen() = delete;

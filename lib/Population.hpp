@@ -19,6 +19,7 @@ class Population {
     std::vector<Specimen> getPopulation() const;
     int getStartCity() const;
     void addSpecimenToPopulation(const Specimen &specimen);
+    void calcFitness();
     static void setStaticStartCity(const int &startCity);
     static int getStaticStartCity();
     static void readCities(const std::string &fileName);
