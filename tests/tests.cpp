@@ -2,6 +2,7 @@
 #include "../lib/Specimen.hpp"
 #include <gtest/gtest.h>
 #include <ranges>
+#include <algorithm>
 
 struct SpecimenClass : public ::testing::Test {
     Specimen s = Specimen(4, 2);
@@ -115,6 +116,31 @@ TEST_F(PopulationClass, AddSpecimenToPopulation) {
     s = Specimen(4, 1);
     EXPECT_NO_THROW(p.addSpecimenToPopulation(s));
 }
+
+TEST_F(PopulationClass, CalcPopulationFitness) {
+    Population::setCitiesDistanceMatrix(actualCities);
+    Population p = Population(100);
+    auto population = p.getPopulation();
+    EXPECT_TRUE(std::all_of(population.begin(), population.end(), [](const Specimen &s) {
+        return s.getFitness() == 0;
+    }));
+    p.calcFitness();
+    population = p.getPopulation();
+    EXPECT_TRUE(std::all_of(population.begin(), population.end(), [](const Specimen &s) {
+        return s.getFitness() != 0;
+    }));
+}
+
+// TEST_F(PopulationClass, SortPopulationByFitnessScore) {
+//     Population::setCitiesDistanceMatrix(citiesDistanceMatrix);
+//     Population p = Population(100);
+//     p.calcFitness();
+//     p.sort();
+//     auto population = p.getPopulation();
+//     EXPECT_TRUE(std::is_sorted(population.begin(), population.end(), [](const Specimen &a, const Specimen &b) {
+//         return a.getFitness() < b.getFitness();
+//     }));
+// }
 
 TEST(SpecimenClassTest, GenerateOffspring) {
     Specimen parent1 = Specimen(std::vector<int>({1, 2, 6, 4, 5, 3, 0, 1}));
