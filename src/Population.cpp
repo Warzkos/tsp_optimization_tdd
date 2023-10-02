@@ -83,3 +83,44 @@ Specimen Population::getBestSpecimen(){
         return a.getFitness() < b.getFitness();
     }));
 }
+
+std::vector<std::pair<int, int>> generateParentIndexes(int numberOfParents, int populationSize) {
+
+    std::random_device rand_dev;
+    std::mt19937 generator(rand_dev());
+    std::uniform_int_distribution<int> distr(0, populationSize - 1);
+
+    std::unordered_set<int> parentIndexes = {};
+
+    while(parentIndexes.size() < numberOfParents){
+        parentIndexes.insert(distr(generator));
+    }
+
+    std::vector<std::pair<int, int>> parentPairsIndexes = {};
+
+    for (auto it = parentIndexes.begin(); it!=parentIndexes.end(); ++it) {
+        parentPairsIndexes.push_back(std::make_pair(*it, *(it++)));
+    }
+
+    return parentPairsIndexes;
+}
+
+void Population::nextGeneration(const int &substitutionPercent, const int &mutationChance, const int &numOfMutations) {
+    Population::calcFitness();
+    Population::sort();
+
+    auto susbstitutionNumber = population.size() * 25 / 100;
+    if (susbstitutionNumber%2==1) {
+        susbstitutionNumber-=1;
+    }
+
+    population.erase(population.begin()+population.size()-susbstitutionNumber, population.end());
+        
+    std::vector<std::pair<int, int>> parentPairsIndexes = generateParentIndexes(susbstitutionNumber, population.size());
+
+    for(auto &parentPairIndexes: parentPairsIndexes){
+        std::pair<Specimen, Specimen> offspring = population[parentPairIndexes.first].generateOffspring(population[parentPairIndexes.second]);
+        population.push_back(offspring.first);
+        population.push_back(offspring.second);
+    }
+}
