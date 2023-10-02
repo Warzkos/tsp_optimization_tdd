@@ -131,16 +131,16 @@ TEST_F(PopulationClass, CalcPopulationFitness) {
     }));
 }
 
-// TEST_F(PopulationClass, SortPopulationByFitnessScore) {
-//     Population::setCitiesDistanceMatrix(citiesDistanceMatrix);
-//     Population p = Population(100);
-//     p.calcFitness();
-//     p.sort();
-//     auto population = p.getPopulation();
-//     EXPECT_TRUE(std::is_sorted(population.begin(), population.end(), [](const Specimen &a, const Specimen &b) {
-//         return a.getFitness() < b.getFitness();
-//     }));
-// }
+TEST_F(PopulationClass, SortPopulationByFitnessScore) {
+    Population::setCitiesDistanceMatrix(actualCities);
+    Population p = Population(100);
+    p.calcFitness();
+    p.sort();
+    auto population = p.getPopulation();
+    EXPECT_TRUE(std::is_sorted(population.begin(), population.end(), [](const Specimen &a, const Specimen &b) {
+        return a.getFitness() < b.getFitness();
+    }));
+}
 
 TEST(SpecimenClassTest, GenerateOffspring) {
     Specimen parent1 = Specimen(std::vector<int>({1, 2, 6, 4, 5, 3, 0, 1}));
