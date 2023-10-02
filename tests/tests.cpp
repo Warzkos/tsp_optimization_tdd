@@ -142,6 +142,21 @@ TEST_F(PopulationClass, SortPopulationByFitnessScore) {
     }));
 }
 
+TEST_F(PopulationClass, GetBestSpecimen) {
+    Population::setCitiesDistanceMatrix(actualCities);
+    Population p = Population(100);
+    Specimen bestSpecimen = p.getBestSpecimen();
+    p.calcFitness();
+    p.sort();
+    EXPECT_EQ(bestSpecimen.getFitness(), p.getPopulation().front().getFitness());
+}
+
+// TEST_F(PopulationClass, NextGeneration) {
+//     Population::setCitiesDistanceMatrix(actualCities);
+//     Population p = Population(100);
+//     p.nextGeneration();
+// }
+
 TEST(SpecimenClassTest, GenerateOffspring) {
     Specimen parent1 = Specimen(std::vector<int>({1, 2, 6, 4, 5, 3, 0, 1}));
     Specimen parent2 = Specimen(std::vector<int>({1, 4, 0, 3, 6, 2, 5, 1}));
