@@ -20,6 +20,7 @@ class Population {
     int getStartCity() const;
     void addSpecimenToPopulation(const Specimen &specimen);
     void calcFitness();
+    void sort();
     static void setStaticStartCity(const int &startCity);
     static int getStaticStartCity();
     static void readCities(const std::string &fileName);

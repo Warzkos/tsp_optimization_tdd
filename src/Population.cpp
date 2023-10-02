@@ -60,6 +60,13 @@ void Population::calcFitness() {
     }
 }
 
+void Population::sort() {
+    std::sort(population.begin(), population.end(),
+              [](const Specimen &a, const Specimen &b) {
+                  return a.getFitness() < b.getFitness();
+              });
+}
+
 void Population::setStaticStartCity(const int &startCity) { 
     if(!(startCity>cities.size())){
         Population::startCity = startCity; 
