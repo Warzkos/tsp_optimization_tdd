@@ -151,11 +151,23 @@ TEST_F(PopulationClass, GetBestSpecimen) {
     EXPECT_EQ(bestSpecimen.getFitness(), p.getPopulation().front().getFitness());
 }
 
-// TEST_F(PopulationClass, NextGeneration) {
-//     Population::setCitiesDistanceMatrix(actualCities);
-//     Population p = Population(100);
-//     p.nextGeneration();
-// }
+TEST_F(PopulationClass, NextGeneration) {
+    Population::setCitiesDistanceMatrix(actualCities);
+    Population p = Population(100);
+    p.calcFitness();
+    int fitnessSum = 0;
+    for(auto &specimen: p.getPopulation()) {
+        fitnessSum+=specimen.getFitness();
+    }
+    for(int i=0; i<10; i++) {
+        p.nextGeneration();
+    }
+    int newFitnessSum = 0;
+    for(auto &specimen: p.getPopulation()) {
+        newFitnessSum+=specimen.getFitness();
+    }
+    EXPECT_TRUE(newFitnessSum<fitnessSum)
+}
 
 TEST(SpecimenClassTest, GenerateOffspring) {
     Specimen parent1 = Specimen(std::vector<int>({1, 2, 6, 4, 5, 3, 0, 1}));
