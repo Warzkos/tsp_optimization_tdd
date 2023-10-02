@@ -76,3 +76,10 @@ void Population::setStaticStartCity(const int &startCity) {
 }
 
 int Population::getStaticStartCity() { return startCity; }
+
+Specimen Population::getBestSpecimen(){
+    Population::calcFitness();
+    return *(std::min_element(population.begin(), population.end(), [](const Specimen &a, const Specimen &b){
+        return a.getFitness() < b.getFitness();
+    }));
+}
