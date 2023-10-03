@@ -120,6 +120,8 @@ void Population::nextGeneration(const int &substitutionPercent, const int &mutat
 
     for(auto &parentPairIndexes: parentPairsIndexes){
         std::pair<Specimen, Specimen> offspring = population[parentPairIndexes.first].generateOffspring(population[parentPairIndexes.second]);
+        offspring.first.mutate(mutationChance, numOfMutations);
+        offspring.second.mutate(mutationChance, numOfMutations);
         population.push_back(offspring.first);
         population.push_back(offspring.second);
     }

@@ -19,7 +19,7 @@ set(SOURCE src/Specimen.cpp src/Population.cpp)
 set(HEADERS lib/Specimen.hpp lib/Population.hpp)
 set(TESTS tests/tests.cpp)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp ${SOURCE} ${HEADERS})
 
 enable_testing()
 
