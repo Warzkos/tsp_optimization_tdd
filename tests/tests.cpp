@@ -163,10 +163,12 @@ TEST_F(PopulationClass, NextGeneration) {
         p.nextGeneration();
     }
     int newFitnessSum = 0;
+    p.calcFitness();
     for(auto &specimen: p.getPopulation()) {
         newFitnessSum+=specimen.getFitness();
     }
-    EXPECT_TRUE(newFitnessSum<fitnessSum)
+    EXPECT_TRUE(p.getPopulation().size() == 100);
+    EXPECT_TRUE(newFitnessSum<fitnessSum);
 }
 
 TEST(SpecimenClassTest, GenerateOffspring) {
