@@ -85,7 +85,6 @@ Specimen Population::getBestSpecimen(){
 }
 
 std::vector<std::pair<int, int>> generateParentIndexes(int numberOfParents, int populationSize) {
-
     std::random_device rand_dev;
     std::mt19937 generator(rand_dev());
     std::uniform_int_distribution<int> distr(0, populationSize - 1);
@@ -109,14 +108,14 @@ void Population::nextGeneration(const int &substitutionPercent, const int &mutat
     Population::calcFitness();
     Population::sort();
 
-    auto susbstitutionNumber = population.size() * 25 / 100;
-    if (susbstitutionNumber%2==1) {
-        susbstitutionNumber-=1;
+    auto numberOfSubstitutedSpecimens = population.size() * 25 / 100;
+    if (numberOfSubstitutedSpecimens%2==1) {
+        numberOfSubstitutedSpecimens-=1;
     }
 
-    population.erase(population.begin()+population.size()-susbstitutionNumber, population.end());
+    population.erase(population.begin()+population.size()-numberOfSubstitutedSpecimens, population.end());
         
-    std::vector<std::pair<int, int>> parentPairsIndexes = generateParentIndexes(susbstitutionNumber, population.size());
+    std::vector<std::pair<int, int>> parentPairsIndexes = generateParentIndexes(numberOfSubstitutedSpecimens, population.size());
 
     for(auto &parentPairIndexes: parentPairsIndexes){
         std::pair<Specimen, Specimen> offspring = population[parentPairIndexes.first].generateOffspring(population[parentPairIndexes.second]);
