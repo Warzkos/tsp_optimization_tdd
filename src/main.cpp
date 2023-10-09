@@ -6,12 +6,8 @@
 int main(int, char **) { 
     std::cout << "Hello, from tsp_optimization_tdd!\n" << std::endl; 
 
-    Population::readCities("FRI26.txt");
+    Population::readCities("***DIRECT_PATH_TO_FILE***");
     Population::setStaticStartCity(0);
-
-    std::cout << "Cost of best possible route: 937" << std::endl;
-    std::cout << "Best possible route: 1 25 24 23 26 22 21 17 18 20 19 16 11 12 13 15 14 10 9 8 7 5 6 4 3 2 1" << std::endl;
-    std::cout << std::endl;
 
     int numberOfRuns = 15;
     int stopAfterNoBetter = 150;
