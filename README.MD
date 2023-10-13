@@ -20,7 +20,10 @@ cmake ..
 make
 ```
 
-To run tests, uncommment lines 12-13 in **CMakeLists.txt** and rebuild the project.
+To run tests, uncommment lines 14-15 in **CMakeLists.txt** and rebuild the project.
+
+To build multi-threaded version of the algorithm, set in line 11 to **TRUE** in **CMakeLists.txt** and build the project. Then insert direct path in line 27 in **mainMultiThread.cpp** to the file containing data and build the project.
+
 
 ## Introduction
 While the primary objective is to devise an efficient algorithm for finding optimal routes in the Traveling Salesman Problem, the project also incorporates Test-Driven Development (TDD) practices to ensure robust code quality.
@@ -40,6 +43,8 @@ is a valid array of 3 cities. First row represents distances from the first city
 
 Crossover method was based on the paper by Üçoluk [[1]](#1). The algorithm was tested on the datasets from [[2]](#2) and it was able to find exact solution for 26 cities problem in under two minutes.
 
+Project consists of two main files: **main.cpp** and **mainMultiThread.cpp** and there are same number of executable binary files generated. The first one is a single-threaded version of the algorithm and the second one is a multi-threaded version.
+
 There are few parameters given to tweak the algorithm:
 - **numberOfRuns** - number of times the algorithm will be run.
 - **stopAfterNoBetter** - number of generations without finding better solution after which the algorithm will stop.
@@ -47,6 +52,9 @@ There are few parameters given to tweak the algorithm:
 - **populationSubstitutionPercentage** - percentage of population that will be substituted by offspring.
 - **mutationChancePercentage** - chance of mutation in offspring.
 - **numberOfMutations** - number of mutations in offspring.
+
+Additionaly, in **mainMultiThread.cpp** there is a parameter: 
+- **numberOfThreads** - which determines the number of threads used in the algorithm. Each thread runs independently a population, so in the same time it searches more solutions. 
 
 A mutation is one swap of two cities in the path of a specimen.
 ## Contributing
