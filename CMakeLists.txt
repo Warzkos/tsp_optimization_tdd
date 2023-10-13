@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+set(USE_MULTITHREAD FALSE)
+
 # uncomment lines below to enable testing
 # include(CTest)
 # enable_testing()
@@ -16,7 +18,11 @@ set(SOURCE src/Specimen.cpp src/Population.cpp)
 set(HEADERS lib/Specimen.hpp lib/Population.hpp)
 set(TESTS tests/tests.cpp)
 
-add_executable(${PROJECT_NAME} src/main.cpp ${SOURCE} ${HEADERS})
+if(USE_MULTITHREAD)
+    add_executable(${PROJECT_NAME}-mt src/mainMultithread.cpp ${SOURCE} ${HEADERS})
+else()
+    add_executable(${PROJECT_NAME} src/main.cpp ${SOURCE} ${HEADERS})
+endif()
 
 if(BUILD_TESTING)
     include(cmake/UpdateSubmodules.cmake)
