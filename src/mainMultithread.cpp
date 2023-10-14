@@ -50,11 +50,23 @@ int main(int, char **) {
         for(int i = 0; i<numberOfThreads; i++){
             std::promise<threadOutputData> promise;
             futureVector.emplace_back(promise.get_future());
-            threadVector.emplace_back(std::move(std::thread (&runPopulation, std::move(promise), stopAfterNoBetter, numberOfSpecimensInPopulation, populationSubstitutionPercentage, mutationChancePercentage, numberOfMutations)));
+            threadVector.emplace_back(
+                std::move(
+                    std::thread(
+                        &runPopulation, 
+                        std::move(promise),
+                        stopAfterNoBetter, 
+                        numberOfSpecimensInPopulation, 
+                        populationSubstitutionPercentage, 
+                        mutationChancePercentage, 
+                        numberOfMutations
+                    )
+                )
+            );
         }
 
-        for(int i = 0; i<numberOfThreads; i++){
-            threadVector[i].join();
+        for(auto &thread: threadVector){
+            thread.join();
         }
 
         std::vector<threadOutputData> outputVector;
@@ -63,12 +75,12 @@ int main(int, char **) {
         }
 
         std::sort(outputVector.begin(), outputVector.end());
-        if(bestFitness > outputVector[0].bestFitness){
-            bestFitness = outputVector[0].bestFitness;
-            bestPath = outputVector[0].bestPath;
+        if(bestFitness > outputVector.front().bestFitness){
+            bestFitness = outputVector.front().bestFitness;
+            bestPath = outputVector.front().bestPath;
         }
 
-        std::cout << "Run " << j+1 << ", best fitness: " << outputVector[0].bestFitness <<  std::endl;
+        std::cout << "Run " << j+1 << ", best fitness: " << outputVector.front().bestFitness <<  std::endl;
     }
 
     std::cout << std::endl;
